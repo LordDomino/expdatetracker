@@ -29,16 +29,17 @@ QLabel#heading3 {
 }
 
 QLabel#item-name {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     font-family: 'Roboto Regular';
 }
 
 QLabel#item-expiry-label {
-
+    font-size: 14px;
 }
 
 QLabel#item-remaining-days-label {
+    font-size: 14px;
     
 }
 
@@ -55,5 +56,11 @@ QFrame#nav-button:hover {
     background-color: red
 }
 
+QFrame#item {
+    border-radius: 10px;
+    background-color:rgb(250, 250, 237) solid;
+}
 
-
+QScrollArea {
+    background-color: #F5F5DC
+}

@@ -49,14 +49,40 @@ class ItemExpiryLabel(QLabel):
 
 
 class ItemRemainingDaysLabel(QLabel):
-    def __init__(self, text: str) -> None:
-        super().__init__(text=text)
-        self.setObjectName("item-remaning-days-label")
+    def __init__(self, val: int) -> None:
+        super().__init__(text=self._generate_label_text(val))
+        self.setObjectName("item-remaining-days-label")
+
+    def _generate_label_text(self, rem_days: int) -> str:
+        if rem_days <= 0:
+            return "Expired"
+        elif rem_days == 1:
+            return f"Expires in {rem_days} day"
+        else:
+            return f"Expires in {rem_days} days"
 
 
 
 class Item(QFrame):
     def __init__(self, name: str, expiry: str, remaining_days: int) -> None:
-        self.item_name = name
-        self.expiry = expiry
-        self.remaining_days = remaining_days
+        super().__init__()
+        self.setObjectName("item")
+        self.name = name
+        self.exp = expiry
+        self.rd = remaining_days
+
+        # Setup layout of item widget
+        self.vbox = QVBoxLayout()
+        self.vbox.setContentsMargins(0, 0, 0, 0)
+        self.vbox.setSpacing(0)
+        self.setLayout(self.vbox)
+
+        # Generate item info labels
+        self._name_label = ItemName(self.name)
+        self._exp_label = ItemExpiryLabel(f"Best Before {self.exp}")
+        self._rd_label = ItemRemainingDaysLabel(self.rd)
+
+        # Add item info labels
+        self.vbox.addWidget(self._name_label)
+        self.vbox.addWidget(self._exp_label)
+        self.vbox.addWidget(self._rd_label)
