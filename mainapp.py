@@ -7,6 +7,8 @@ from PyQt5.QtWidgets import (
 from db_utils import ProductDatabase
 
 
+
+
 def get_stylesheet(filepath: str):
     with open(filepath, "r") as f:
         _style = f.read()
@@ -32,6 +34,8 @@ APP = Application("products_ko.txt")
 def main():
     from windows import AppWindow
     app_window = AppWindow()
+    from PyQt5.QtGui import QFontDatabase 
+    QFontDatabase.addApplicationFont("fonts/Montserrat-Bold.ttf")
 
     from frames import HomeScreen
     init_screen = HomeScreen()

@@ -1,9 +1,9 @@
 QMainWindow {
-    background-color: #e0e0e0e0
+    background-color: #004643
 }
 
 QLabel {
-    font-family: "Arial";
+    font-family: 'Montserrat';
 }
 
 QLabel#button-text {
@@ -31,13 +31,21 @@ QLabel#heading3 {
 QLabel#item-name {
     font-size: 16px;
     font-weight: bold;
+    font-family: 'Roboto Regular';
 }
 
 QFrame#nav-bar {
     border-top: 1px solid black;
 }
 
+QFrame#nav-button {
+    Font-family: 'Montserrat';
+}
+
 QFrame#nav-button:hover {
     font-weight: bold;
     background-color: red
 }
+
+
+

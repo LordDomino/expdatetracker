@@ -1,9 +1,11 @@
 from PyQt5.QtWidgets import (
     QFrame,
     QVBoxLayout,
-    QLabel
+    QLabel,
+    
 )
 from PyQt5.QtCore import Qt
+
 
 
 
@@ -36,4 +38,6 @@ class ItemName(QLabel):
     def __init__(self, text: str) -> None:
         super().__init__(text=text)
         self.setObjectName("item-name")
-        self.setStyleSheet("background-color: red")
+        self.setStyleSheet("background-color: #004663")
+       
+
