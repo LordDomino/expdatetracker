@@ -157,6 +157,12 @@ class AddNewButton(QPushButton):
 
 
 
+################################################################################
+###### POP UP WIDGETS ##########################################################
+################################################################################
+
+
+
 class Heading1(QLabel):
 
     def __init__(self, text: str) -> None:
@@ -219,11 +225,11 @@ class PopupDialog(QDialog):
         self.note_field = Field()
         self.confirm = QPushButton("Confirm")
 
-        self.grid.addItem(self.heading, 0, 0, 1, 1, Qt.AlignmentFlag.AlignHCenter)
-        self.grid.addItem(self.name_label, 0, 1)
-        self.grid.addItem(self.name_field, 0, 2)
-        self.grid.addItem(self.exp_label, 0, 3)
-        self.grid.addItem(self.exp_field, 0, 4)
-        self.grid.addItem(self.note_label, 0, 5)
-        self.grid.addItem(self.note_field, 0, 6)
-        self.grid.addItem(self.confirm, 0, 6)
+        self.grid.addWidget(self.heading, 0, 0)
+        self.grid.addWidget(self.name_label, 1, 0)
+        self.grid.addWidget(self.name_field, 2, 0)
+        self.grid.addWidget(self.exp_label, 3, 0)
+        self.grid.addWidget(self.exp_field, 4, 0)
+        self.grid.addWidget(self.note_label, 5, 0)
+        self.grid.addWidget(self.note_field, 6, 0)
+        self.grid.addWidget(self.confirm, 7, 0)
