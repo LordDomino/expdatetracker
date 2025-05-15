@@ -99,18 +99,23 @@ class ItemRemainingDaysLabel(QLabel):
 
 
 class Item(QFrame):
-    def __init__(self, name: str, expiry: str, remaining_days: int) -> None:
+    def __init__(self, id: int, name: str, expiry: str, remaining_days: int) -> None:
         super().__init__()
         self.setObjectName("item")
+        self.id = id
         self.name = name
         self.exp = expiry
         self.rd = remaining_days
+        self.consume_button = QPushButton("Consume")
+        self.fav_button = QPushButton("Fav")
+
+        self.consume_button.clicked.connect(self.clicked_consume)
 
         # Setup layout of item widget
-        self.vbox = QVBoxLayout()
-        self.vbox.setContentsMargins(0, 0, 0, 0)
-        self.vbox.setSpacing(0)
-        self.setLayout(self.vbox)
+        self.grid = QGridLayout()
+        self.grid.setContentsMargins(0, 0, 0, 0)
+        self.grid.setSpacing(0)
+        self.setLayout(self.grid)
 
         # Generate item info labels
         self._name_label = ItemName(self.name)
@@ -118,9 +123,11 @@ class Item(QFrame):
         self._rd_label = ItemRemainingDaysLabel(self.rd)
 
         # Add item info labels
-        self.vbox.addWidget(self._name_label)
-        self.vbox.addWidget(self._exp_label)
-        self.vbox.addWidget(self._rd_label)
+        self.grid.addWidget(self._name_label, 0, 1)
+        self.grid.addWidget(self._exp_label, 1, 1)
+        self.grid.addWidget(self._rd_label, 2, 1)
+        self.grid.addWidget(self.consume_button, 0, 0, 3, 1, Qt.AlignmentFlag.AlignCenter)
+        self.grid.addWidget(self.fav_button, 0, 2, 3, 1, Qt.AlignmentFlag.AlignCenter)
 
         self.setStyleSheet("""
             QFrame#item {
@@ -130,6 +137,11 @@ class Item(QFrame):
                 border: 1px solid #e0e0e0;
             }
         """)
+
+    def clicked_consume(self) -> None:
+        from app import APP
+        APP.database.delete_product_by_id(self.id)
+        APP.init_screen.inv_scroll.redraw_items()
 
 
 
@@ -237,18 +249,15 @@ class PopupDialog(QDialog):
 
     def _confirmed(self):
         from app import APP
-    
-        print("clicked")
+
         if self._check_name() and self._check_date():
-            print("activated")
             APP.database.add_product(
                 self.name_field.text(),
                 self.exp_field.text(),
                 "false",
                 self.note_field.text()
             )
-            print(APP)
-            APP.init_screen.inv_scroll.refresh_items()
+            APP.init_screen.inv_scroll.redraw_items()
 
     def _check_name(self) -> bool:
         return bool(self.name_field.text().strip())

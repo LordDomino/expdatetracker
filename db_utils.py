@@ -26,9 +26,9 @@ class Product:
 class ProductDatabase:
     def __init__(self, filename):
         self.filename = filename
-        self.products: List[Product] = self.load_products()
+        self.products: List[Product] = self.load()
 
-    def load_products(self):
+    def load(self):
         products = []
         try:
             with open(self.filename, "r") as file:
@@ -47,6 +47,9 @@ class ProductDatabase:
         except FileNotFoundError:
             print("Database file not found.")
         return products
+
+    def reload(self) -> None:
+        self.products = self.load()
 
     def save_products(self, products):
         with open(self.filename, "w") as file:

@@ -44,27 +44,25 @@ class InventoryScroll(QScrollArea):
         self.setWidgetResizable(True)
 
     def draw_items(self, db: ProductDatabase) -> None:
-        print(self.vbox)
         for product in db.products:
-            item = Item(product.name, product.exp_date, product.get_remaining_days())
+            item = Item(product.id, product.name, product.exp_date, product.get_remaining_days())
             self.items[product.id] = item
 
             self.vbox.addWidget(item)
 
     def clear_items(self) -> None:
-        print(self.vbox)
-        print(self.vbox.count())
+        print(self)
         for i in reversed(range(self.vbox.count())): 
-            self.vbox.itemAt(i).widget()._name_label.setText("H")
-            self.vbox.itemAt(i).widget().setParent(None)
+            # self.vbox.itemAt(i).widget().setParent(None)
+            self.vbox.itemAt(i).widget().deleteLater()
+            self.vbox.itemAt(i).widget().setParent(None)            
 
-    def refresh_items(self) -> None:
+    def redraw_items(self) -> None:
         from app import APP
         self.clear_items()
-        self.update()
-        self.draw_items(APP.get_database())
-
-            
+        APP.processEvents()
+        APP.database.reload()
+        self.draw_items(APP.database)
 
 
 
