@@ -12,6 +12,8 @@ import mainapp
 
 
 #HELLO WORLD
+# Hello Arghie
+
 class InventoryScroll(QScrollArea):
 
     def __init__(self) -> None:
