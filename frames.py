@@ -1,4 +1,4 @@
-from typing import Dict, Sequence
+from typing import Dict, Sequence, override
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QFrame, QVBoxLayout, QHBoxLayout,
@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import (
 )
 
 from db_utils import ProductDatabase
-from widgets import Item, ItemExpiryLabel, ItemName, ItemRemainingDaysLabel, NavButton
+from widgets import AddNewButton, Item, ItemExpiryLabel, ItemName, ItemRemainingDaysLabel, NavButton
 
 import mainapp
 
@@ -21,12 +21,16 @@ class InventoryScroll(QScrollArea):
         self.setObjectName("inventory-scroll")
         self.items: Dict[int, ItemName] = {}
 
+        self.setStyleSheet("""
+            QScrollArea {
+                background-color: #004643
+            }
+        """)
+
         # Container for content
         self.container = QFrame()
-        # self.container.setStyleSheet("""
-        #                              background-color: rgb(250, 250, 238);
-        #                              border-radius: 10px;
-        #                              """)
+
+        
 
         self.vbox = QVBoxLayout()
         self.vbox.setContentsMargins(10, 10, 10, 10)
@@ -39,7 +43,6 @@ class InventoryScroll(QScrollArea):
 
         # Generates the different items
         self.draw_items(mainapp.APP.get_database())
-
 
     def draw_items(self, db: ProductDatabase) -> None:
         for product in db.products:
@@ -82,3 +85,22 @@ class HomeScreen(QFrame):
         self.navbar = NavBar([NavButton("Inventory"), NavButton("Tips"), NavButton("Settings")])
         self.vbox.addWidget(InventoryScroll())
         self.vbox.addWidget(self.navbar)
+
+        # Add button
+        self.add_new_button = AddNewButton()
+        self.add_new_button.resize(60, 60)
+        self.add_new_button.setParent(self)
+        self._position_fab()
+
+    @override
+    def resizeEvent(self, event) -> None: # type: ignore
+        super().resizeEvent(event)
+        self._position_fab()
+
+    def _position_fab(self) -> None:
+        margin = 20  # distance from bottom-right corner
+        btn_w = self.add_new_button.width()
+        btn_h = self.add_new_button.height()
+        x = self.width() - btn_w - margin
+        y = self.height() - btn_h - margin - self.navbar.height()
+        self.add_new_button.move(x, y)
