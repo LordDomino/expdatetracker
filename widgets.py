@@ -25,8 +25,20 @@ class NavButton(QFrame):
         self.vbox.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.label = QLabel(label, self)
-        self.label.setObjectName("button-text")
-
+        self.label.setObjectName("nav-button")
+        self.label.setStyleSheet(""" 
+            QLabel#nav-button{
+                Font-family: 'Montserrat';
+                Font-size: 20px;
+            }
+        """)
+        self.setObjectName("nav-button")
+        self.setStyleSheet("""   
+             QFrame#nav-button:hover {
+                font-weight: bold;
+                background-color: red;
+                }
+            """)
         self.vbox.addWidget(self.label)
 
         # Interaction styling
@@ -57,7 +69,7 @@ class ItemExpiryLabel(QLabel):
     def __init__(self, text: str) -> None:
         super().__init__(text=text)
         self.setObjectName("item-expiry-label")
-        self.setStyleSheet("""" 
+        self.setStyleSheet("""
             QLabel#item-expiry-label {
                 font-size: 14px;
                 font-family: 'Nunito Sans';
