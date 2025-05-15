@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import List
 
 class Product:
     def __init__(self, id, name, expiration_date, log_date):
@@ -21,7 +22,7 @@ class Product:
 class ProductDatabase:
     def __init__(self, filename):
         self.filename = filename
-        self.products = self.load_products()
+        self.products: List[Product] = self.load_products()
 
     def load_products(self):
         products = []
