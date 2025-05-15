@@ -86,3 +86,7 @@ class Item(QFrame):
         self.vbox.addWidget(self._name_label)
         self.vbox.addWidget(self._exp_label)
         self.vbox.addWidget(self._rd_label)
+
+
+
+    
