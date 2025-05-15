@@ -4,11 +4,11 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
     QLabel,
     QPushButton,
-    QLineEdit
+    QLineEdit,
+    QDialog,
+    QGridLayout
 )
 from PyQt5.QtCore import Qt
-
-from windows import PopupDialog
 
 
 
@@ -188,3 +188,30 @@ class Field(QLineEdit):
                 font-size: 12px;
             }
         """)
+
+
+
+class PopupDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Add New Food Item")
+        self.grid = QGridLayout()
+        self.setLayout(self.grid)
+
+        self.heading = Heading1("Add new")
+        self.name_label = FieldLabel("Item name")
+        self.name_field = Field()
+        self.exp_label = FieldLabel("Expiration date")
+        self.exp_field = Field()
+        self.note_label = FieldLabel("Add note")
+        self.note_field = Field()
+        self.confirm = QPushButton("Confirm")
+
+        self.grid.addItem(self.heading, 0, 0, 1, 1, Qt.AlignmentFlag.AlignHCenter)
+        self.grid.addItem(self.name_label, 0, 1)
+        self.grid.addItem(self.name_field, 0, 2)
+        self.grid.addItem(self.exp_label, 0, 3)
+        self.grid.addItem(self.exp_field, 0, 4)
+        self.grid.addItem(self.note_label, 0, 5)
+        self.grid.addItem(self.note_field, 0, 6)
+        self.grid.addItem(self.confirm, 0, 6)
