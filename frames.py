@@ -104,17 +104,9 @@ class HomeScreen(QFrame):
         self.vbox.addWidget(self.navbar)
         self.setObjectName("home-screen")
 
-        self.setStyleSheet("""
-            QFrame#home-screen    {
-                Font-family: 'Montserrat';
-                Font-size: 20px;
-        }""")
+        
 
-        self.setStyleSheet("""
-            QFrame#home-screen:hover {
-                font-weight: bold;
-                background-color: red;
-        }""")
+       
         # Add button
         self.add_new_button = AddNewButton()
         self.add_new_button.resize(60, 60)
