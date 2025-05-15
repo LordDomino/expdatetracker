@@ -39,6 +39,14 @@ class ItemName(QLabel):
         super().__init__(text=text)
         self.setObjectName("item-name")
 
+        self.setStyleSheet("""
+            QLabel#item-name {
+                font-size: 18px;
+                font-weight: bold;
+                font-family: 'Roboto Regular';
+            }
+        """)
+
 
 
 class ItemExpiryLabel(QLabel):
@@ -86,3 +94,18 @@ class Item(QFrame):
         self.vbox.addWidget(self._name_label)
         self.vbox.addWidget(self._exp_label)
         self.vbox.addWidget(self._rd_label)
+
+        self.setStyleSheet("""
+            QFrame#item {
+                padding: 10px;
+                border-radius: 10px;
+                background: #f8f8f8;
+                border: 1px solid #e0e0e0;
+            }
+        """)
+
+
+
+class AddNewButton(QPushButton):
+
+    def __init__(self)

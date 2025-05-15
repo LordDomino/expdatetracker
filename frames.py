@@ -23,9 +23,13 @@ class InventoryScroll(QScrollArea):
 
         # Container for content
         self.container = QFrame()
+        # self.container.setStyleSheet("""
+        #                              background-color: rgb(250, 250, 238);
+        #                              border-radius: 10px;
+        #                              """)
 
         self.vbox = QVBoxLayout()
-        self.vbox.setContentsMargins(0, 0, 0, 0)
+        self.vbox.setContentsMargins(10, 10, 10, 10)
         self.vbox.setSpacing(10)
         self.container.setLayout(self.vbox)
         self.container.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
