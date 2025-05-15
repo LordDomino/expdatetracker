@@ -38,6 +38,25 @@ class ItemName(QLabel):
     def __init__(self, text: str) -> None:
         super().__init__(text=text)
         self.setObjectName("item-name")
-        self.setStyleSheet("background-color: #004663")
-       
 
+
+
+class ItemExpiryLabel(QLabel):
+    def __init__(self, text: str) -> None:
+        super().__init__(text=text)
+        self.setObjectName("item-expiry-label")
+
+
+
+class ItemRemainingDaysLabel(QLabel):
+    def __init__(self, text: str) -> None:
+        super().__init__(text=text)
+        self.setObjectName("item-remaning-days-label")
+
+
+
+class Item(QFrame):
+    def __init__(self, name: str, expiry: str, remaining_days: int) -> None:
+        self.item_name = name
+        self.expiry = expiry
+        self.remaining_days = remaining_days
