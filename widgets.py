@@ -9,8 +9,7 @@ from PyQt5.QtWidgets import (
     QGridLayout
 )
 from PyQt5.QtCore import Qt
-
-
+import re
 
 
 class NavButton(QFrame):
@@ -233,3 +232,29 @@ class PopupDialog(QDialog):
         self.grid.addWidget(self.note_label, 5, 0)
         self.grid.addWidget(self.note_field, 6, 0)
         self.grid.addWidget(self.confirm, 7, 0)
+
+        self.confirm.clicked.connect(self._confirmed)
+
+    def _confirmed(self):
+        from app import APP
+    
+        print("clicked")
+        if self._check_name() and self._check_date():
+            print("activated")
+            APP.database.add_product(
+                self.name_field.text(),
+                self.exp_field.text(),
+                "false",
+                self.note_field.text()
+            )
+            print(APP)
+            APP.init_screen.inv_scroll.refresh_items()
+
+    def _check_name(self) -> bool:
+        return bool(self.name_field.text().strip())
+    
+    def _check_date(self) -> bool:
+        if self.exp_field.text().strip():
+            if re.match("^[0-9]{2}-[0-9]{2}-[0-9]{4}$", self.exp_field.text()):
+                return True
+        return False

@@ -8,11 +8,7 @@ from PyQt5.QtWidgets import (
 from db_utils import ProductDatabase
 from widgets import AddNewButton, Item, ItemName, NavButton
 
-import mainapp
 
-
-#HELLO WORLD
-# Hello Arghie
 
 class InventoryScroll(QScrollArea):
 
@@ -38,7 +34,6 @@ class InventoryScroll(QScrollArea):
             }
         """)
         
-
         self.vbox = QVBoxLayout()
         self.vbox.setContentsMargins(10, 10, 10, 10)
         self.vbox.setSpacing(10)
@@ -48,15 +43,26 @@ class InventoryScroll(QScrollArea):
         self.setWidget(self.container)
         self.setWidgetResizable(True)
 
-        # Generates the different items
-        self.draw_items(mainapp.APP.get_database())
-
     def draw_items(self, db: ProductDatabase) -> None:
+        print(self.vbox)
         for product in db.products:
             item = Item(product.name, product.exp_date, product.get_remaining_days())
             self.items[product.id] = item
 
             self.vbox.addWidget(item)
+
+    def clear_items(self) -> None:
+        print(self.vbox)
+        print(self.vbox.count())
+        for i in reversed(range(self.vbox.count())): 
+            self.vbox.itemAt(i).widget()._name_label.setText("H")
+            self.vbox.itemAt(i).widget().setParent(None)
+
+    def refresh_items(self) -> None:
+        from app import APP
+        self.clear_items()
+        self.update()
+        self.draw_items(APP.get_database())
 
             
 
@@ -81,8 +87,6 @@ class NavBar(QFrame):
         self.setLayout(self.hbox)
         self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
 
-       
-
         # Add the different buttons to the navigation bar
         for button in self.buttons:
             self.hbox.addWidget(button)    
@@ -99,13 +103,11 @@ class HomeScreen(QFrame):
         self.vbox.setSpacing(0)
         self.setLayout(self.vbox)
 
+        self.inv_scroll = InventoryScroll()
         self.navbar = NavBar([NavButton("Inventory"), NavButton("Tips"), NavButton("Settings")])
-        self.vbox.addWidget(InventoryScroll())
+        self.vbox.addWidget(self.inv_scroll)
         self.vbox.addWidget(self.navbar)
         self.setObjectName("home-screen")
-
-        
-
        
         # Add button
         self.add_new_button = AddNewButton()
