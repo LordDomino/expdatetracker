@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import (
     QFrame,
     QVBoxLayout,
     QLabel,
-    
+    QPushButton
 )
 from PyQt5.QtCore import Qt
 
@@ -107,5 +107,16 @@ class Item(QFrame):
 
 
 class AddNewButton(QPushButton):
+    def __init__(self) -> None:
+        super().__init__(text="+")
+        self.setObjectName("add-new-button")
 
-    def __init__(self)
+        self.setStyleSheet("""
+            QPushButton#add-new-button {
+                background-color: #f9bc60;
+                border-radius: 30px;
+                border: 1px solid #000000;
+                font-size: 30px;
+                text-align: center;
+            }
+        """)
