@@ -35,11 +35,13 @@ QLabel#item-name {
 }
 
 QLabel#item-expiry-label {
-
+    font-size: 12px;
+    font-family: 'Nunito Sans';
 }
 
 QLabel#item-remaining-days-label {
-    
+    font-size: 12px;
+    font-family: 'Nunito Sans';
 }
 
 QFrame#nav-bar {
