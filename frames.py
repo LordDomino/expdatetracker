@@ -22,7 +22,7 @@ class InventoryScroll(QScrollArea):
         self.items: Dict[int, ItemName] = {}
 
         self.setStyleSheet("""
-            QScrollArea {
+            QScrollArea#inventory-scroll {
                 background-color: #004643
             }
         """)
@@ -58,6 +58,8 @@ class InventoryScroll(QScrollArea):
 
             self.vbox.addWidget(item)
 
+            
+
 
 
 class NavBar(QFrame):
@@ -67,11 +69,19 @@ class NavBar(QFrame):
         self.setObjectName("nav-bar")
         self.buttons = buttons
 
+        self.setStyleSheet("""
+            QFrame#nav-bar  {
+                border-top: 1px solid black;
+                background-color: #abd1c6;
+        }""")
+
         # Setup layout for NavBar
         self.hbox = QHBoxLayout()
         self.hbox.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.hbox)
         self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+
+       
 
         # Add the different buttons to the navigation bar
         for button in self.buttons:
@@ -92,12 +102,26 @@ class HomeScreen(QFrame):
         self.navbar = NavBar([NavButton("Inventory"), NavButton("Tips"), NavButton("Settings")])
         self.vbox.addWidget(InventoryScroll())
         self.vbox.addWidget(self.navbar)
+        self.setObjectName("home-screen")
 
+        self.setStyleSheet("""
+            QFrame#home-screen    {
+                Font-family: 'Montserrat';
+                Font-size: 20px;
+        }""")
+
+        self.setStyleSheet("""
+            QFrame#home-screen:hover {
+                font-weight: bold;
+                background-color: red;
+        }""")
         # Add button
         self.add_new_button = AddNewButton()
         self.add_new_button.resize(60, 60)
         self.add_new_button.setParent(self)
         self._position_fab()
+
+        
 
     @override
     def resizeEvent(self, event) -> None: # type: ignore
