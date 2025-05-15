@@ -53,6 +53,12 @@ class ItemExpiryLabel(QLabel):
     def __init__(self, text: str) -> None:
         super().__init__(text=text)
         self.setObjectName("item-expiry-label")
+        self.setStyleSheet("""" 
+            QLabel#item-expiry-label {
+                font-size: 14px;
+                font-family: 'Nunito Sans';
+            }
+        """)
 
 
 
@@ -60,6 +66,12 @@ class ItemRemainingDaysLabel(QLabel):
     def __init__(self, val: int) -> None:
         super().__init__(text=self._generate_label_text(val))
         self.setObjectName("item-remaining-days-label")
+        self.setStyleSheet(""" 
+            QLabel#item-remaining-days-label {
+                font-size: 14px;
+                font-family: 'Nunito Sans';
+            }
+        """)
 
     def _generate_label_text(self, rem_days: int) -> str:
         if rem_days <= 0:
