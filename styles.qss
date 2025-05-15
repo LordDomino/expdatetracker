@@ -38,10 +38,6 @@ QLabel#item-remaining-days-label {
     font-family: 'Nunito Sans';
 }
 
-QFrame#nav-bar {
-    border-top: 1px solid black;
-    background-color: #abd1c6;
-}
 
 QFrame#nav-button {
     Font-family: 'Montserrat';

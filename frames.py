@@ -51,6 +51,8 @@ class InventoryScroll(QScrollArea):
 
             self.vbox.addWidget(item)
 
+            
+
 
 
 class NavBar(QFrame):
@@ -65,6 +67,12 @@ class NavBar(QFrame):
         self.hbox.setContentsMargins(0, 0, 0, 0)
         self.setLayout(self.hbox)
         self.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+
+        self.setStyleSheet("""
+             QFrame#nav-bar {
+                border-top: 1px solid black;
+                background-color: #abd1c6;
+        }""")
 
         # Add the different buttons to the navigation bar
         for button in self.buttons:
