@@ -11,7 +11,7 @@ from widgets import ItemName, NavButton
 import mainapp
 
 
-
+#HELLO WORLD
 class InventoryScroll(QScrollArea):
 
     def __init__(self) -> None:
