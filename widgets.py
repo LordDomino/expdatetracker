@@ -202,7 +202,7 @@ class Field(QLineEdit):
         self.setStyleSheet("""
             QLineEdit#field {
                 font-family: 'Roboto Regular';
-                font-size: 12px;
+                font-size: 20px;
             }
         """)
 
@@ -214,13 +214,13 @@ class PopupDialog(QDialog):
         self.setWindowTitle("Add New Food Item")
         self.grid = QGridLayout()
         self.setLayout(self.grid)
-
-        self.heading = Heading1("Add new")
-        self.name_label = FieldLabel("Item name")
+        self.heading = Heading1("Add New")
+        
+        self.name_label = FieldLabel("Item Name")
         self.name_field = Field()
-        self.exp_label = FieldLabel("Expiration date")
+        self.exp_label = FieldLabel("Expiration Date")
         self.exp_field = Field()
-        self.note_label = FieldLabel("Add note")
+        self.note_label = FieldLabel("Add Note")
         self.note_field = Field()
         self.confirm = QPushButton("Confirm")
 
@@ -258,3 +258,6 @@ class PopupDialog(QDialog):
             if re.match("^[0-9]{2}-[0-9]{2}-[0-9]{4}$", self.exp_field.text()):
                 return True
         return False
+
+
+        
