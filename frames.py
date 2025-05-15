@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import (
 )
 
 from db_utils import ProductDatabase
-from widgets import AddNewButton, Item, ItemExpiryLabel, ItemName, ItemRemainingDaysLabel, NavButton
+from widgets import AddNewButton, Item, ItemName, NavButton
 
 import mainapp
 
@@ -29,7 +29,14 @@ class InventoryScroll(QScrollArea):
 
         # Container for content
         self.container = QFrame()
-
+        self.container.setObjectName("inv-container")
+        self.container.setStyleSheet("""
+            QFrame#inv-container {
+                margin: 10px;
+                background-color: #F5F5DC;
+                border-radius: 15px;
+            }
+        """)
         
 
         self.vbox = QVBoxLayout()
@@ -46,7 +53,7 @@ class InventoryScroll(QScrollArea):
 
     def draw_items(self, db: ProductDatabase) -> None:
         for product in db.products:
-            item = Item(product.name, product.expiration_date, product.get_remaining_days())
+            item = Item(product.name, product.exp_date, product.get_remaining_days())
             self.items[product.id] = item
 
             self.vbox.addWidget(item)

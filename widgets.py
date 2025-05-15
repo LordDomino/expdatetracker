@@ -1,10 +1,14 @@
+from typing import override
 from PyQt5.QtWidgets import (
     QFrame,
     QVBoxLayout,
     QLabel,
-    QPushButton
+    QPushButton,
+    QLineEdit
 )
 from PyQt5.QtCore import Qt
+
+from windows import PopupDialog
 
 
 
@@ -118,5 +122,57 @@ class AddNewButton(QPushButton):
                 border: 1px solid #000000;
                 font-size: 30px;
                 text-align: center;
+            }
+        """)
+
+    @override
+    def mousePressEvent(self, event) -> None: # type: ignore
+        print("Add new printed")
+        popup = PopupDialog(self)
+        popup.exec_()
+
+
+
+class Heading1(QLabel):
+
+    def __init__(self, text: str) -> None:
+        super().__init__(text=text)
+        self.setObjectName("heading1")
+
+        self.setStyleSheet("""
+            QLabel#heading1 {
+                font-family: 'Montserrat';
+                font-size: 30px;
+                font-weight: bold;
+            }
+        """)
+
+
+
+class FieldLabel(QLabel):
+
+    def __init__(self, text: str) -> None:
+        super().__init__(text=text)
+        self.setObjectName("field-label")
+
+        self.setStyleSheet("""
+            QLabel#field-label {
+                font-family: 'Roboto Regular';
+                font-size: 12px;
+            }
+        """)
+
+
+
+class Field(QLineEdit):
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.setObjectName("field")
+
+        self.setStyleSheet("""
+            QLineEdit#field {
+                font-family: 'Roboto Regular';
+                font-size: 12px;
             }
         """)

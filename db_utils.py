@@ -2,22 +2,23 @@ from datetime import datetime
 from typing import List
 
 class Product:
-    def __init__(self, id, name, expiration_date, log_date):
+    def __init__(self, id, name, exp_date, log_date, is_fav):
         self.id = id
         self.name = name
-        self.expiration_date = expiration_date
+        self.exp_date = exp_date
         self.log_date = log_date
+        self.is_fav: bool = is_fav
 
     def to_string(self):
-        return f"{self.id}_{self.name}_{self.expiration_date}_{self.log_date}"
+        return f"{self.id}_{self.name}_{self.exp_date}_{self.log_date}_{self.is_fav}"
 
     def get_remaining_days(self) -> int:
+        today = datetime.now()
+        exp_date = datetime.strptime(self.exp_date, "%m-%d-%Y")
         try:
-            exp_date = datetime.strptime(self.expiration_date, "%m-%d-%Y")
-            today = datetime.now()
             return (exp_date - today).days
         except ValueError:
-            return None
+            return -((today - exp_date).days)
 
 class ProductDatabase:
     def __init__(self, filename):
@@ -31,12 +32,13 @@ class ProductDatabase:
                 lines = file.readlines()
                 for line in lines:
                     parts = line.strip().split("_")
-                    if len(parts) == 4:
-                        product_id = int(parts[0])
+                    if len(parts) == 5:
+                        item_id = int(parts[0])
                         name = parts[1]
-                        expiration_date = parts[2]
+                        exp_date = parts[2]
                         log_date = parts[3]
-                        product = Product(product_id, name, expiration_date, log_date)
+                        is_fav = parts[4]
+                        product = Product(item_id, name, exp_date, log_date, is_fav)
                         products.append(product)
         except FileNotFoundError:
             print("Database file not found.")
@@ -50,10 +52,10 @@ class ProductDatabase:
     def _get_next_id(self):
         return len(self.products) + 1
 
-    def add_product(self, name, expiration_date):
+    def add_product(self, name, exp_date, is_fav: str):
         product_id = self._get_next_id()
         log_date = datetime.now().strftime("%m-%d-%Y")
-        product = Product(product_id, name, expiration_date, log_date)
+        product = Product(product_id, name, exp_date, log_date, (is_fav == 'true'))
 
         with open(self.filename, "a") as file:
             file.write(product.to_string() + "\n")
@@ -66,7 +68,7 @@ class ProductDatabase:
             return
 
         # Sort by expiration date
-        self.products.sort(key=lambda p: datetime.strptime(p.expiration_date, "%m-%d-%Y"))
+        self.products.sort(key=lambda p: datetime.strptime(p.exp_date, "%m-%d-%Y"))
 
         # Reassign IDs and update file
         for i, product in enumerate(self.products, start=1):
@@ -83,7 +85,7 @@ class ProductDatabase:
             else:
                 status = f"{remaining_days} day(s) left"
 
-            print(f"ID: {product.id} | Name: {product.name} | Expiry: {product.expiration_date} "
+            print(f"ID: {product.id} | Name: {product.name} | Expiry: {product.exp_date} "
                   f"| Log Date: {product.log_date} | Remaining: {status}")
 
     def search_product_by_id(self, search_id):

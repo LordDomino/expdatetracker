@@ -34,9 +34,12 @@ APP = Application("products_ko.txt")
 def main():
     from windows import AppWindow
     app_window = AppWindow()
+    
+    # Fonts setup
     from PyQt5.QtGui import QFontDatabase 
     QFontDatabase.addApplicationFont("fonts/Montserrat-Bold.ttf")
     QFontDatabase.addApplicationFont("fonts/nunito-sans.regular.ttf")
+    
     from frames import HomeScreen
     init_screen = HomeScreen()
     app_window.setCentralWidget(init_screen)

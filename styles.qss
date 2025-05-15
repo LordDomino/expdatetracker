@@ -14,11 +14,6 @@ QLabel#text {
     font-size: 12px;
 }
 
-QLabel#heading1 {
-    font-size: 30px;
-    font-weight: bold;
-}
-
 QLabel#heading2 {
     font-size: 25px;
 }
