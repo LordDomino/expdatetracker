@@ -33,8 +33,6 @@ def get_stylesheet(filepath: str):
 
 
 def main():  
-    # import notify
-
     # Fonts setup
     from PyQt5.QtGui import QFontDatabase 
     QFontDatabase.addApplicationFont("fonts/Montserrat-Bold.ttf")

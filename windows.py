@@ -15,5 +15,6 @@ class AppWindow(QMainWindow):
         self.setWindowIcon(QIcon(QPixmap("resources\\icon.png")))
 
     def switch_to_home(self) -> None:
-        from app import APP
+        import notify
+        from app import APP        
         self.setCentralWidget(APP.home_screen)
