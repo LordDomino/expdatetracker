@@ -80,13 +80,9 @@ class ItemExpiryLabel(QLabel):
 class ItemRemainingDaysLabel(QLabel):
     def __init__(self, val: int) -> None:
         super().__init__(text=self._generate_label_text(val))
+        self.rem_days = val
         self.setObjectName("item-remaining-days-label")
-        self.setStyleSheet(""" 
-            QLabel#item-remaining-days-label {
-                font-size: 14px;
-                font-family: 'Nunito Sans';
-            }
-        """)
+        self._auto_set_font_color()
 
     def _generate_label_text(self, rem_days: int) -> str:
         if rem_days <= 0:
@@ -95,6 +91,44 @@ class ItemRemainingDaysLabel(QLabel):
             return f"Expires in {rem_days} day"
         else:
             return f"Expires in {rem_days} days"
+
+    def _auto_set_font_color(self) -> None:
+        if self.rem_days < 0:
+            self.setStyleSheet("""
+                QLabel#item-remaining-days-label {
+                    font-size: 14px;
+                    font-weight: bold;
+                    font-family: 'Nunito Sans';
+                    color: red;
+                }
+            """)
+        elif self.rem_days <= 7:
+            self.setStyleSheet("""
+                QLabel#item-remaining-days-label {
+                    font-size: 14px;
+                    font-weight: bold;
+                    font-family: 'Nunito Sans';
+                    color: orange;
+                }
+            """)
+        elif self.rem_days <= 28:
+            self.setStyleSheet("""
+                QLabel#item-remaining-days-label {
+                    font-size: 14px;
+                    font-weight: bold;
+                    font-family: 'Nunito Sans';
+                    color: yellow;
+                }
+            """)
+        elif self.rem_days <= 365:
+            self.setStyleSheet("""
+                QLabel#item-remaining-days-label {
+                    font-size: 14px;
+                    font-weight: bold;
+                    font-family: 'Nunito Sans';
+                    color: green;
+                }
+            """)
 
 
 
@@ -182,6 +216,7 @@ class Heading1(QLabel):
 
         self.setStyleSheet("""
             QLabel#heading1 {
+                color: #004643;
                 font-family: 'Montserrat';
                 font-size: 30px;
                 font-weight: bold;

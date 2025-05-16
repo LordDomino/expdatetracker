@@ -2,11 +2,35 @@ from typing import Dict, Sequence, override
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QFrame, QVBoxLayout, QHBoxLayout,
-    QSizePolicy, QScrollArea
+    QSizePolicy, QScrollArea, QWidget
 )
 
 from db_utils import ProductDatabase
-from widgets import AddNewButton, Item, ItemName, NavButton
+from widgets import AddNewButton, Heading1, Item, ItemName, NavButton
+
+
+
+class InventoryHeader(QFrame):
+    
+    def __init__(self) -> None:
+        super().__init__()
+        self.setObjectName("inventory-header")
+
+        self.setStyleSheet("""
+            QFrame#inventory-header {
+                padding: 0px 10px;
+                background-color: #e16162;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px; 
+            }
+        """)
+        
+        self.vbox = QVBoxLayout()
+        self.setLayout(self.vbox)
+
+        self.header = Heading1("Inventory")
+
+        self.vbox.addWidget(self.header)
 
 
 
@@ -19,7 +43,8 @@ class InventoryScroll(QScrollArea):
 
         self.setStyleSheet("""
             QScrollArea#inventory-scroll {
-                background-color: #004643
+                background-color: #004643;
+                border: none
             }
         """)
 
@@ -101,8 +126,10 @@ class HomeScreen(QFrame):
         self.vbox.setSpacing(0)
         self.setLayout(self.vbox)
 
+        self.header = InventoryHeader()
         self.inv_scroll = InventoryScroll()
         self.navbar = NavBar([NavButton("Inventory"), NavButton("Tips"), NavButton("Settings")])
+        self.vbox.addWidget(self.header)
         self.vbox.addWidget(self.inv_scroll)
         self.vbox.addWidget(self.navbar)
         self.setObjectName("home-screen")

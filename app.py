@@ -32,8 +32,7 @@ def main():
     from windows import AppWindow
     app_window = AppWindow()
     
-    from notify import notify
-    notify()
+    import notify
 
     # Fonts setup
     from PyQt5.QtGui import QFontDatabase 
