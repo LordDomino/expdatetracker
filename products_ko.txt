@@ -1,1 +1,28 @@
-1_singkamas_12-16-2025_05-16-2025_False_
+1_yakult_05-30-2025_05-16-2025_False_
+2_potatoes_05-20-2025_05-16-2025_False_Stock food
+3_milk_05-21-2025_05-16-2025_True_Fresh full cream milk
+4_eggs_06-01-2025_05-16-2025_True_Dozen large brown eggs
+5_kalamansi_05-25-2025_05-16-2025_False_Local citrus for juice and seasoning
+6_tomatoes_05-22-2025_05-16-2025_False_Plump and ripe
+7_onions_06-10-2025_05-16-2025_True_Red and white onions
+8_garlic_06-15-2025_05-16-2025_True_Essential for cooking
+9_fish_sauce_12-16-2025_05-16-2025_False_Patis in glass bottle
+10_soy_sauce_12-10-2025_05-16-2025_False_Silver Swan
+11_margarine_08-01-2025_05-16-2025_True_For pan de sal
+12_hotdogs_05-30-2025_05-16-2025_True_Red hotdogs, local brand
+13_taho_05-17-2025_05-16-2025_False_Leftover from morning vendor
+14_sinigang_mix_11-01-2025_05-16-2025_False_Tamarind base packet
+15_pandesal_05-17-2025_05-16-2025_False_Bought from bakery
+16_ice_06-16-2025_05-16-2025_False_Ice cubes in plastic bags
+17_salted_eggs_05-24-2025_05-16-2025_False_Stored with tomatoes
+18_cheese_06-01-2025_05-16-2025_True_Eden block cheese
+19_butter_07-05-2025_05-16-2025_True_For cooking and baking
+20_pineapple_juice_06-20-2025_05-16-2025_False_Ready-to-drink tetra pack
+21_sardines_12-30-2025_05-16-2025_False_Canned, tomato sauce variant
+22_milkfish_05-18-2025_05-16-2025_False_Fresh bangus
+23_ampalaya_05-20-2025_05-16-2025_False_For ginisang ampalaya
+24_lechon_leftovers_05-17-2025_05-16-2025_False_Remaining from birthday party
+25_lumpia_wrappers_05-23-2025_05-16-2025_False_Unused from prep
+26_calamari_05-19-2025_05-16-2025_False_Stored in freezer
+27_cucumber_05-21-2025_05-16-2025_False_For ensaladang pipino
+28_mangoes_05-19-2025_05-16-2025_True_Ripe carabao mangoes

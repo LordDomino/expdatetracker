@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import List
-
+import random
 
 class Product:
     def __init__(self, id, name, exp_date, log_date, is_fav, note=""):
@@ -18,7 +18,11 @@ class Product:
         today = datetime.now()
         exp_date = datetime.strptime(self.exp_date, "%m-%d-%Y")
         try:
-            return (exp_date - today).days
+            diff = (exp_date - today).days
+            if diff == 0:
+                return 1
+            else:
+                return diff
         except ValueError:
             return -((today - exp_date).days)
 
@@ -27,6 +31,7 @@ class ProductDatabase:
     def __init__(self, filename):
         self.filename = filename
         self.products: List[Product] = self.load()
+        self.sort_products_by_expiry()
 
     def load(self):
         products = []
@@ -50,6 +55,7 @@ class ProductDatabase:
 
     def reload(self) -> None:
         self.products = self.load()
+        self.sort_products_by_expiry()
 
     def save_products(self, products):
         with open(self.filename, "w") as file:
@@ -114,3 +120,45 @@ class ProductDatabase:
         self.save_products(updated_products)
 
         print(f"Product with ID {delete_id} has been deleted and IDs have been updated.")
+
+    def sort_products_by_expiry(self):
+        self.quickSort(self.products, 0, len(self.products) - 1)
+
+    # Partition function
+    def partition(self, arr: List[Product], low: int, high: int):
+    
+        # Choose the pivot
+        pivot = self.products[high]
+
+        # Index of smaller element and indicates 
+        # the right position of pivot found so far
+        i = low - 1
+
+        # Traverse arr[low..high] and move all smaller
+        # elements to the left side. Elements from low to 
+        # i are smaller after every iteration
+        for j in range(low, high):
+            if arr[j].get_remaining_days() < pivot.get_remaining_days():
+                i += 1
+                self.swap(arr, i, j)
+
+        # Move pivot after smaller elements and
+        # return its position
+        self.swap(arr, i + 1, high)
+        return i + 1
+
+    # Swap function
+    def swap(self, arr, i, j):
+        arr[i], arr[j] = arr[j], arr[i]
+
+    # The QuickSort function implementation
+    def quickSort(self, arr, low, high):
+        if low < high:
+
+            # pi is the partition return index of pivot
+            pi = self.partition(arr, low, high)
+
+            # Recursion calls for smaller elements
+            # and greater or equals elements
+            self.quickSort(arr, low, pi - 1)
+            self.quickSort(arr, pi + 1, high)
