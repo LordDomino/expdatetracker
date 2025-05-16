@@ -262,6 +262,13 @@ class PopupDialog(QDialog):
         self.grid = QGridLayout()
         self.setLayout(self.grid)
         self.heading = Heading1("Add New")
+
+        self.setObjectName("popup-bg")
+        self.setStyleSheet(""" 
+            QDialog#popup-bg    {        
+                background-color: #F5F5DC
+            } 
+        """)
         
         self.name_label = FieldLabel("Item Name")
         self.name_field = Field()
@@ -270,6 +277,8 @@ class PopupDialog(QDialog):
         self.note_label = FieldLabel("Add Note")
         self.note_field = Field()
         self.confirm = QPushButton("Confirm")
+
+        
 
         self.grid.addWidget(self.heading, 0, 0)
         self.grid.addWidget(self.name_label, 1, 0)
