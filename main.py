@@ -1,7 +1,7 @@
 import winreg as reg 
 import os             
 
-import app
+import app, ctypes
 
 
 def add_to_registry():
@@ -35,5 +35,7 @@ def add_to_registry():
 
 
 if __name__ == "__main__":
+    myappid = u'team.antukin.ekspyry' # arbitrary string
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
     add_to_registry()
     app.main()
