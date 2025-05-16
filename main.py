@@ -28,14 +28,14 @@ def add_to_registry():
     open_key = reg.OpenKey(key,key_value,0,reg.KEY_ALL_ACCESS)
     
     # Modify the opened key
-    reg.SetValueEx(open_key,"eksSPYry",0,reg.REG_SZ,address)
+    reg.SetValueEx(open_key,"ekSPYry",0,reg.REG_SZ,address)
     
     # Close the opened key
     reg.CloseKey(open_key)
 
 
 if __name__ == "__main__":
-    myappid = u'team.antukin.ekspyry' # arbitrary string
+    myappid = u'ekSPYry' # arbitrary string
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
     add_to_registry()
     app.main()
