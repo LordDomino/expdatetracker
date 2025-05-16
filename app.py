@@ -23,7 +23,7 @@ class Application(QApplication):
 
 
 
-APP = Application("products_ko.txt")
+APP = Application("items.txt")
 
 
 def get_stylesheet(filepath: str):
